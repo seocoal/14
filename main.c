@@ -3,23 +3,38 @@
 
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
 
+
+struct Book{
+	int number;
+	char title[10];
+};
+
 int main(int argc, char *argv[]) {
+	int i;
+	struct Book**bookshelf;
 	
-	char *pc=NULL;
-	int i=0;
+	bookshelf=(struct Book**)malloc(sizeof(struct Book*));
+	for(i=0;i<3;i++)
+	  bookshelf[i]= malloc(10*sizeof(struct Book));
+	  
+	bookshelf[1][3].number=5;
+	strcpy(bookshelf[1][3].title, "C++ Programming");
 	
-	pc=(char*)malloc(100*sizeof(char));
-	if(pc==NULL){
-		printf("메모리할당오류\n");
-	exit(1);
-	}
+	(bookshelf[2]+4)->number=3;
+	strcpy((bookshelf[2]+4)->title, "Communications Theory");
 	
-	for(i=0;i<26;i++){
-		pc[i]='a'+i;
-	}
-	pc[i]=0;
-	printf("%s\n", pc);
+	printf("book(1,3): %i, %s\n", (bookshelf[1]+3)->number, (bookshelf[1]+3) ->title );
+	printf("book(2,4): %i, %s\n", bookshelf[2][4].number, bookshelf[2][4].title);
 	
-	free(pc);
-	return 0;
+	
+	for (i=0;i<3;i++)
+	   free(bookshelf[i]);
+	   
+	free(bookshelf);
+	    
+
+
+
+	
+
 }
